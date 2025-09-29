@@ -78,6 +78,7 @@ data.author    // the author
 const quoteBtn = document.getElementById("t3-loadQuote");
 const quote = document.getElementById("t3-quote");
 const author = document.getElementById("t3-author");
+
 quoteBtn.addEventListener("click", function () {
 fetch("https://dummyjson.com/quotes/random")
   .then(function (response) {
@@ -121,5 +122,39 @@ data.main.temp      → temperature (°C)
 data.main.humidity  → humidity (%)
 data.wind.speed     → wind speed (m/s)
 */
+
+const wBtn = document.getElementById("t4-loadWx");
+const wTemp = document.getElementById("t4-temp");
+const wHum = document.getElementById("t4-hum");
+const wWind = document.getElementById("t4-wind");
+const wErr = document.getElementById("t4-err");
+
+const url = "https://api.openweathermap.org/data/2.5/weather"
+          + "?q=Dammam"
+          + "&appid=9c29da573838fd8cdd561179419142d7"
+          + "&units=metric";
+
+wBtn.addEventListener("click", function () {
+    fetch(url)
+  .then(function (response) {
+    if (!response.ok) {                 
+      throw new Error("HTTP " + response.status);
+    }
+    return response.json();             
+  })
+
+  .then(function (data) {
+    wTemp.textContent= data.main.temp 
+    wHum.textContent = data.main.humidity
+    wWind.textContent = data.wind.speed
+
+  })
+
+  .catch(function (err) {;
+    wErr.textContent = "Failed to load data.";
+    console.error(err);
+  });
+
+})
 
 
