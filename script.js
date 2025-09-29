@@ -37,13 +37,16 @@ the <p> with id="t2-status" to:
 - Get the button element.
 - Add a click event listener.
 - Inside the event, change the text of the status paragraph.
-
-💡 Hint:
-button.addEventListener("click", function () {
-    // change text here
-});
 */
- 
+
+const t2btn = document.getElementById("t2-btn");
+const t2status = document.getElementById("t2-status");
+t2btn.addEventListener("click", function () {
+t2status.textContent = "You clicked the button!";
+
+});
+
+
 
 /*  
 =======================================
