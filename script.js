@@ -75,7 +75,28 @@ data.content   // the quote text
 data.author    // the author
 */
  
+const quoteBtn = document.getElementById("t3-loadQuote");
+const quote = document.getElementById("t3-quote");
+const author = document.getElementById("t3-author");
+quoteBtn.addEventListener("click", function () {
+fetch("https://dummyjson.com/quotes/random")
+  .then(function (response) {
+    if (!response.ok) {              
+      throw new Error("HTTP " + response.status);
+    }
+    return response.json();             
+  })
+  .then(function (data) {
+    quote.textContent= data.quote
+    author.textContent= data.author
 
+  })
+  .catch(function (err) {
+    quote.textContent = "Failed to load quote, try again"
+    author.textContent= "Failed to load author"
+  });
+
+})
 /*  
 =======================================
 TODO4: Dammam Weather Now
@@ -100,3 +121,5 @@ data.main.temp      → temperature (°C)
 data.main.humidity  → humidity (%)
 data.wind.speed     → wind speed (m/s)
 */
+
+
